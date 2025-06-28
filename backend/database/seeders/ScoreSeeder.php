@@ -16,7 +16,7 @@ class ScoreSeeder extends Seeder
     // Chunked bulk insert
     public function run(): void
     {
-        $path = storage_path('app/diem_thi_thpt_2024.csv');
+        $path = database_path('diem_thi_thpt_2024.csv');
 
         if(!File::exists($path)) {
             echo "File csv not found";
