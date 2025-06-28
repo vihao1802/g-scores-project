@@ -1,70 +1,40 @@
-# PHP-FPM is a FastCGI implementation for PHP.
-# Read more here: https://hub.docker.com/_/php
-FROM php:8.2-fpm
+FROM php:8.3.11-fpm
 
-
-RUN apt-get update
-
-# Install useful tools
-RUN apt-get -y install apt-utils nano wget dialog vim
-
-# Install system dependencies
-RUN apt-get -y install --fix-missing \
-    apt-utils \
+# Update package list and install dependencies
+RUN apt-get update && apt-get install -y \
     build-essential \
-    git \
-    curl \
-    libcurl4 \
-    libcurl4-openssl-dev \
-    zlib1g-dev \
+    libpng-dev \
+    libjpeg-dev \
+    libwebp-dev \
+    libxpm-dev \
+    libfreetype6-dev \
     libzip-dev \
     zip \
-    libbz2-dev \
-    locales \
+    unzip \
+    git \
+    bash \
+    fcgiwrap \
     libmcrypt-dev \
-    libicu-dev \
     libonig-dev \
-    libxml2-dev
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN docker-php-ext-install \
-    exif \
-    pcntl \
-    bcmath \
-    ctype \
-    curl \
-    pcntl \
-    zip 
-
-# Install Postgre PDO
-RUN apt-get install -y libpq-dev \
-    && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
-    && docker-php-ext-install pdo pdo_pgsql pgsql
-
-# Install NPM
-RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
-RUN apt-get install -y nodejs
-
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+# Install PHP extensions
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
+    && docker-php-ext-install gd \
+    && docker-php-ext-install pdo pdo_pgsql mbstring zip exif pcntl bcmath opcache
 
 # Install Composer
-COPY --from=composer:2.3 /usr/bin/composer /usr/bin/composer
-
-# Set working directory
-WORKDIR /var/www/html
-
-# Add user for laravel application
-RUN groupadd -g 1000 www
-RUN useradd -u 1000 -ms /bin/bash -g www www
+COPY --from=composer/composer:latest-bin /composer /usr/bin/composer
 
 # Copy existing application directory contents
-COPY . /var/www/html
+COPY . /var/www/html/
 
-# Copy existing application directory permissions
-COPY --chown=www:www . /var/www/html
+# Set ownership and permissions for the /var/www/html directory to www-data
+RUN chown -R www-data:www-data /var/www/html/
 
-# Change current user to www
-USER www
+USER www-data
 
-# Set port for application
-EXPOSE 8000
+EXPOSE 9000
+
+CMD ["php-fpm"]
