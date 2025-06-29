@@ -1,21 +1,19 @@
 services:
   frontend:
+    container_name: frontend
     build:
       context: ./frontend
     ports:
       - "5173:5173"
-    volumes:
-      - ./frontend:/app
-      - ./frontend/node_modules
     environment:
-      - VITE_API_BASE_URL=http://caddy/api
-    restart: unless-stopped
+      - VITE_BACKEND_URL=http://localhost/api
     networks:
       - app-network
     depends_on:
       - caddy
 
   backend:
+    container_name: backend
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -28,6 +26,7 @@ services:
       - db
 
   caddy:
+    container_name: caddy
     image: caddy:latest
     ports:
       - 80:80
@@ -41,17 +40,18 @@ services:
       - backend
 
   db:
+    container_name: db
     image: bitnami/postgresql:16.3.0
     platform: linux/amd64
     ports:
-      - 5432:5432
+      - 5435:5432
     restart: always
     volumes:
       - db-data:/bitnami/postgresql
     environment:
-      - POSTGRESQL_DATABASE=${POSTGRESQL_DATABASE}
-      - POSTGRESQL_USERNAME=${POSTGRESQL_USERNAME}
-      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+      - POSTGRESQL_DATABASE=postgres-database
+      - POSTGRESQL_USERNAME=postgres-username
+      - POSTGRESQL_PASSWORD=postgres-password
     networks:
       - app-network
 
