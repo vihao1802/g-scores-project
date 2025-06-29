@@ -1,6 +1,6 @@
 # G-Scores - Student Score Tracker
 
-## Completed Features
+## 🎯 Completed Features
 
 - The conversion of raw data from csv file into the database (code for this process is in [ScoreSeeder.php](backend/database/seeders/ScoreSeeder.php))
 - Check score from registration number input
@@ -12,11 +12,11 @@
 - Setup project use Docker and Docker Compose
 - Deploy the application to go live (using Netlify and Render)
 
-## Screenshots
+## 📸 Screenshots
 
 - I have taken screenshots of the application. You can find them in the [SCREENSHOTS.md](SCREENSHOTS.md) file.
 
-## Live Demo
+## 🚀 Live Demo
 
 - Frontend: https://g-scores-frontend.netlify.app/
 - Backend API: https://g-scores-project.onrender.com
@@ -24,7 +24,7 @@
 
 (⚠️ Using Render Free Plan so it may cause slow response time)
 
-## Tech Stack
+## 🛠 Tech Stack
 
 ### Frontend
 
@@ -55,7 +55,7 @@
 - VSCode (or any other code editor)
 - Docker (optional)
 
-## Getting Started
+## 🚀 Getting Started (or Run with [Docker Compose](#docker-compose-run-local))
 
 ### 1. Clone the Repository
 
@@ -150,13 +150,33 @@ cd g-scores-project
    npm run dev
    ```
 
-### Access the Application
+#### 🎯 Access the Application
 
 - Frontend: http://localhost:5173
 - Backend API: http://localhost:8000
 - PostgreSQL: localhost:5432
 
-### Docker Setup (optional)
+## Docker Compose Run Local
+
+- ⚠️ Before run docker compose, please go to `backend/.env`, comment values in `Option 1` and uncomment values in `Option 2`:
+
+  ```env
+  # Option 1: Use these without docker
+  # DB_CONNECTION=pgsql
+  # DB_HOST=localhost
+  # DB_PORT=5432
+  # DB_DATABASE=scores_db
+  # DB_USERNAME=
+  # DB_PASSWORD=
+
+  # Option 2: Use these below if you use docker compose
+  DB_CONNECTION=pgsql
+  DB_HOST=db
+  DB_PORT=5432
+  DB_DATABASE=postgres-database
+  DB_USERNAME=postgres-username
+  DB_PASSWORD=postgres-password
+  ```
 
 1. From the `root` directory, start the containers:
 
@@ -176,10 +196,15 @@ cd g-scores-project
   docker-compose exec backend php artisan db:seed
   ```
 
-### Access the application:
+#### 🎯 Access the application:
 
 - Frontend: http://localhost:5173
 - Backend API: http://localhost
 - PostgreSQL: localhost:5435
+
+### REFERENCES
+
+- [laravel-render-template](https://github.com/codingnninja/laravel-render-template)
+- [laravel-docker-setup](https://github.com/Tenacity-Dev/laravel-docker-setup)
 
 ⭐ Thank you for spending your time on my application! If you have any questions, please don't hesitate to contact me.
