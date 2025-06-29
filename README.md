@@ -9,6 +9,8 @@
 - View number of student participate in the exam
 - List top 10,20, and 30 students of group A including (math, physics, chemistry)
 - Responsive design (look good on all devices: desktops, tablets & mobile phones)
+- Applied ORM Eloquent for interaction with database
+- Use of OOP programming for managing subjects
 - Setup project use Docker and Docker Compose
 - Deploy the application to go live (using Netlify and Render)
 
@@ -38,6 +40,7 @@
 ### Backend
 
 - Laravel 12
+- Eloquent ORM
 - PHP 8.2
 - PostgreSQL 16
 - Docker
