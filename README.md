@@ -79,7 +79,13 @@ cd g-scores-project
    cd backend
    ```
 
-2. Create a copy of the `.env.example` file and name it `.env`:
+2. Install dependencies:
+
+   ```bash
+   composer install
+   ```
+
+3. Create a copy of the `.env.example` file and name it `.env`:
 
    ```bash
    cp .env.example .env
@@ -89,7 +95,7 @@ cd g-scores-project
    php artisan key:generate
    ```
 
-3. Change the following values in the `.env` file to match your database configuration:
+4. Change the following values in the `.env` file to match your database configuration:
 
    ```env
    DB_CONNECTION=pgsql
@@ -98,12 +104,6 @@ cd g-scores-project
    DB_DATABASE=score_db # or any name you want
    DB_USERNAME=<database_username>
    DB_PASSWORD=<database_password>
-   ```
-
-4. Install dependencies:
-
-   ```bash
-   composer install
    ```
 
 5. Run these to set up the database and seed it with initial data:
@@ -176,9 +176,10 @@ cd g-scores-project
   docker-compose exec backend php artisan db:seed
   ```
 
-3. Access the application:
-   - Frontend: http://localhost:5173
-   - Backend API: http://localhost:8000
-   - PostgreSQL: localhost:5432
+### Access the application:
+
+- Frontend: http://localhost:5173
+- Backend API: http://localhost
+- PostgreSQL: localhost:5435
 
 ⭐ Thank you for spending your time on my application! If you have any questions, please don't hesitate to contact me.
