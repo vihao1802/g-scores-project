@@ -2,6 +2,12 @@
 
 Below are screenshots demonstrating various features and pages of the application.
 
+## Responsive View
+
+![Responsive View](images/responsive-view-1.png)
+
+![Responsive View](images/responsive-view-2.png)
+
 ## Dashboard
 
 **Light Mode**
