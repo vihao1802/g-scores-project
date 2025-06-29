@@ -2,7 +2,7 @@
 
 ## Completed Features
 
-- The conversion of raw data from csv file into the database
+- The conversion of raw data from csv file into the database (code for this process is in [ScoreSeeder.php](backend/database/seeders/ScoreSeeder.php))
 - Check score from registration number input
 - View statistics of the number of students with scores in 4 levels by subjects with charts
 - View top #1 students of group A including (math, physics, chemistry) statistically
@@ -50,7 +50,7 @@
 - Composer
 - PHP 8.2
 - PostgreSQL 16
-- PgAdmin (for managing local PostgreSQL database)
+- PgAdmin (UI for managing local PostgreSQL database)
 - Git
 - VSCode (or any other code editor)
 - Docker (optional)
@@ -118,6 +118,8 @@ cd g-scores-project
   php artisan db:seed
   ```
 
+- Code for seeding data from csv file to database is in [ScoreSeeder.php](backend/database/seeders/ScoreSeeder.php)
+
 6. Run the following command to start the server:
    ```bash
    php artisan serve
@@ -179,6 +181,4 @@ cd g-scores-project
    - Backend API: http://localhost:8000
    - PostgreSQL: localhost:5432
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+⭐ Thank you for spending your time on my application! If you have any questions, please don't hesitate to contact me.
