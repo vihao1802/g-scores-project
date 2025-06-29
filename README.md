@@ -158,7 +158,9 @@ cd g-scores-project
 
 ## Docker Compose Run Local
 
-- ⚠️ Before run docker compose, please go to `backend/.env`, comment values in `Option 1` and uncomment values in `Option 2`:
+- ⚠️ Before run docker compose, please go to `backend/.env`.
+
+- Then comment values in `Option 1` and uncomment values in `Option 2`:
 
   ```env
   # Option 1: Use these without docker
