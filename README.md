@@ -4,19 +4,25 @@
 
 - The conversion of raw data from csv file into the database
 - Check score from registration number input
-- View Statistics of the number of students with scores in the 4 levels by subjects with charts
+- View statistics of the number of students with scores in 4 levels by subjects with charts
+- View top #1 students of group A including (math, physics, chemistry) statistically
+- View number of student participate in the exam
 - List top 10,20, and 30 students of group A including (math, physics, chemistry)
 - Responsive design (look good on all devices: desktops, tablets & mobile phones)
-- Setup project use Docker
-- Deploy the application to go live (using netlify and render)
+- Setup project use Docker and Docker Compose
+- Deploy the application to go live (using Netlify and Render)
+
+## Screenshots
+
+- I have taken screenshots of the application. You can find them in the [SCREENSHOTS.md](SCREENSHOTS.md) file.
 
 ## Live Demo
 
 - Frontend: https://g-scores-frontend.netlify.app/
 - Backend API: https://g-scores-project.onrender.com
-- Database: host on render
+- Database: host on Render PostgreSQL
 
-(Render Free Plan so may slow response time)
+(⚠️ Using Render Free Plan so it may cause slow response time)
 
 ## Tech Stack
 
@@ -25,25 +31,29 @@
 - React.js 18
 - TypeScript
 - Tailwind CSS
-- React Query
 - ApexCharts
 - Vite
 - Netlify Deploy
 
 ### Backend
 
-- Laravel 10
+- Laravel 12
 - PHP 8.2
-- PostgreSQL
+- PostgreSQL 16
 - Docker
 - Render Deploy (for backend and database)
 
 ## Prerequisites
 
-- Docker 20.10+ and Docker Compose
-- Node.js 18+ (for local frontend development)
-- Composer (for local backend development)
+- Node.js 18+
+- npm comes with Node.js
+- Composer
+- PHP 8.2
+- PostgreSQL 16
+- PgAdmin (for managing local PostgreSQL database)
 - Git
+- VSCode (or any other code editor)
+- Docker (optional)
 
 ## Getting Started
 
@@ -51,16 +61,19 @@
 
 ```bash
 git clone https://github.com/vihao1802/g-scores-project.git
+```
+
+```bash
 cd g-scores-project
 ```
 
-### 2. Environment Setup
+### 2. Project Local Setup
 
-- Use two terminal to run this project
+- ⚠️ Use two terminal to run this project
 
 #### Backend
 
-1. Move to backend directory:
+1. From the `root` directory, move to `backend` directory:
 
    ```bash
    cd backend
@@ -72,32 +85,47 @@ cd g-scores-project
    cp .env.example .env
    ```
 
-3. Change the following values in the `.env` file:
+   ```bash
+   php artisan key:generate
+   ```
+
+3. Change the following values in the `.env` file to match your database configuration:
 
    ```env
    DB_CONNECTION=pgsql
    DB_HOST=localhost
    DB_PORT=5432
-   DB_DATABASE=<database_name>
+   DB_DATABASE=score_db # or any name you want
    DB_USERNAME=<database_username>
    DB_PASSWORD=<database_password>
    ```
 
-4. Run these to set up the database:
+4. Install dependencies:
+
+   ```bash
+   composer install
+   ```
+
+5. Run these to set up the database and seed it with initial data:
 
    ```bash
    php artisan migrate
-   php artisan db:seed
    ```
 
-5. Run the following command to start the server:
+- This seeding data process will take a while to finish
+
+  ```bash
+  php artisan db:seed
+  ```
+
+6. Run the following command to start the server:
    ```bash
    php artisan serve
    ```
 
 #### Frontend
 
-1. Install dependencies:
+1. From the `root` directory, move to `frontend` directory:
 
    ```bash
    cd frontend
@@ -128,25 +156,25 @@ cd g-scores-project
 
 ### Docker Setup (optional)
 
-1. Start the containers:
+1. From the `root` directory, start the containers:
 
    ```bash
    docker-compose up -d --build
    ```
 
-2. Run database migrations:
+2. Run database migrations and seed it with initial data:
 
    ```bash
    docker-compose exec backend php artisan migrate
    ```
 
-3. Seed the database (optional):
+- This seeding data process will take a while to finish
 
-   ```bash
-   docker-compose exec backend php artisan db:seed
-   ```
+  ```bash
+  docker-compose exec backend php artisan db:seed
+  ```
 
-4. Access the application:
+3. Access the application:
    - Frontend: http://localhost:5173
    - Backend API: http://localhost:8000
    - PostgreSQL: localhost:5432
